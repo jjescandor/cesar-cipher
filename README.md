@@ -7,24 +7,23 @@
 
 #### Description
 
-- Scrape a Wikipedia page of your choosing and  this app will record which passages need citations.
-- E.g. History of Mexico has a few “citations needed”.
-- This app reports the number of citations needed.
-- This app identifies those cases AND include the relevant passage.
-- E.g. Citation needed for “lorem spam and impsum eggs”
+ - This is an implementation of Ceasar Cipher's app that allows user to encrypt and decryp a message using a key.
+ - It also allows has an algorithm that would allow the user to crack an encrpted message.
 
 ### Run the app
 
-1. run scraper.py in the terminal
+ - pip install nltk
+ - run scraper.py in the terminal
 
-#### Implementation Notes
+#### User Acceptance
 
-- Module must be named scraper.py
-- Create function named get_citations_needed_count
-- takes in a url string and returns an integer.
-- Create function named get_citations_needed_report
-- takes in a url string and returns a report string
-- the string should be formatted with each citation listed in the order found.
+The application must:
+
+ - encrypt a string with a given shift
+ - decrypt a previously encrypted string with the same shift.
+ - encryption should handle upper and lower case letters.
+ - encryption should allow non-alpha characters but ignore them, including white space.
+ - decrypt encrypted version of It was the best of times, it was the worst of times. WITHOUT knowing the shift used.
 
 ### Tests
 
@@ -32,5 +31,5 @@
 
 ### Link to code
 
-1. [link to code](scraper.py)
+1. [link to code](cipher.py)
 
