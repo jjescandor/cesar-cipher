@@ -36,7 +36,7 @@ def decrypt(sentence, key):
     return encrypt(sentence, -key)
 
 
-def crack(encrypted_str):
+def crack(encrypted_str, percent=0.8):
     dictionary = MultiDictionary()
     words = encrypted_str.split(" ")
     optimize_list = []
@@ -62,7 +62,7 @@ def crack(encrypted_str):
         for word in deciphered.split():
             if word in word_list + name_list and len(word) > 1:
                 optimize_list.append(word)
-    if len(optimize_list) > 0 and len(optimize_list)/len(words) > 0.5:
+    if len(optimize_list) > 0 and len(optimize_list)/len(words) > 0.2:
         for word in optimize_list:
             for j in range(1, 26):
                 new_word = ""
@@ -84,7 +84,7 @@ def crack(encrypted_str):
                         key.append((length + 26) - length1)
                     else:
                         key.append(length - length1)
-        if len(key) and len(key)/len(optimize_list) > 0.8:
+        if len(key) and len(key)/len(optimize_list) > percent:
             return decrypt(encrypted_str, most_frequent(key))
     return ""
 
@@ -101,7 +101,22 @@ def most_frequent(List):
 
 
 if __name__ == "__main__":
-    # dictionary = MultiDictionary()
-    print(encrypt("I will always love you", 10))
-    print(decrypt("S gsvv kvgkic vyfo iye", 10))
-    print(crack("Ix fhw txe fofg of ndhrl, it nad tho hndrk of allkd."))
+    harry_potter = """
+    Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much. They were the last people you'd expect to be involved in anything strange or mysterious, because they just didn't hold with such nonsense. Mr. Dursley was the director of a fi rm called Grunnings, which made drills. He was a big, beefy man with hardly any neck, although he did have a very large mustache.
+    """
+    harry_potter_encrpted = """
+    Wb. kxn Wbc. Nebcvoi, yp xewlob pyeb, Zbsfod Nbsfo, gobo zbyen dy cki drkd droi gobo zobpomdvi xybwkv, drkxu iye fobi wemr. Droi gobo dro vkcd zoyzvo iye'n ohzomd dy lo sxfyvfon sx kxidrsxq cdbkxqo yb wicdobsyec, lomkeco droi tecd nsnx'd ryvn gsdr cemr xyxcoxco. Wb. Nebcvoi gkc dro nsbomdyb yp k ps bw mkvvon Qbexxsxqc, grsmr wkno nbsvvc. Ro gkc k lsq, loopi wkx gsdr rkbnvi kxi xomu, kvdryeqr ro nsn rkfo k fobi vkbqo wecdkmro.
+    """
+    print("\n")
+    print("** This app encrypts, decrypts a nessage as well as crack an encrpted code using Cesar's Cipher **")
+    print("** Here's an example using a passage from Harry Potter **")
+    print("\n")
+    print("** Encryted **\n",  encrypt(harry_potter, 10))
+    print("** Decrypted **\n", decrypt(harry_potter_encrpted, 10))
+    print("\nDecoding...\n")
+    print("** Cracked code **\n", crack(harry_potter_encrpted, 0.6))
+    decode = input(
+        "It's your turn, enter an encrypted message or press enter to quit:\n\n")
+    if decode:
+        print("\n** Cracked code **\n\n", crack(decode, 0.2))
+    print("\n\n** Thank you for using this app! **")
