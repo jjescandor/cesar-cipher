@@ -45,6 +45,7 @@ def crack(encrypted_str):
     for word in words:
         for j in range(1, 26):
             new_word = ""
+            search_word = ""
             for i, letter in enumerate(word):
                 if letter in Uppercase + Lowercase:
                     temp = list(alphabet.keys())[
@@ -52,9 +53,10 @@ def crack(encrypted_str):
                     if temp > 26:
                         temp %= 26
                     new_word += alphabet[abs(temp)]
+                    search_word += alphabet[abs(temp)]
                 else:
                     new_word += letter
-            if new_word in word_list + name_list:
+            if search_word in word_list + name_list:
                 deciphered += f"{new_word} "
     if len(deciphered) > 0:
         for word in deciphered.split():
