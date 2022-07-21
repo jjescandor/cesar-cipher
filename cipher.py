@@ -36,8 +36,7 @@ def decrypt(sentence, key):
 
 def crack(encrypted_str, percent=0.8):
     words = encrypted_str.split(" ")
-    optimize_list = []
-    deciphered = ""
+    deciphered = []
     key = []
     for word in words:
         for j in range(1, 26):
@@ -53,14 +52,10 @@ def crack(encrypted_str, percent=0.8):
                     search_word += alphabet[abs(temp)]
                 else:
                     new_word += letter
-            if search_word in word_list + name_list:
-                deciphered += f"{new_word} "
-    if len(deciphered) > 0:
-        for word in deciphered.split():
-            if word in word_list + name_list and len(word) > 1:
-                optimize_list.append(word)
-    if len(optimize_list) > 0 and len(optimize_list)/len(words) > 0.2:
-        for word in optimize_list:
+            if search_word in word_list + name_list and len(search_word) > 1:
+                deciphered.append(new_word)
+    if len(deciphered) > 0 and len(words)/len(deciphered) > 0.2:
+        for word in deciphered:
             for j in range(1, 26):
                 new_word = ""
                 for i, letter in enumerate(word):
@@ -81,7 +76,7 @@ def crack(encrypted_str, percent=0.8):
                         key.append((length + 26) - length1)
                     else:
                         key.append(length - length1)
-        if len(key) and len(key)/len(optimize_list) > percent:
+        if len(key) and len(key)/len(deciphered) > percent:
             return decrypt(encrypted_str, most_frequent(key))
     return ""
 
