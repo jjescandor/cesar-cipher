@@ -1,9 +1,7 @@
 from curses import keyname
 from distutils.dep_util import newer_pairwise
-from PyMultiDictionary import MultiDictionary
 from corpus_loader import word_list, name_list
 import enum
-import re
 
 
 alphabet = {1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k',
@@ -37,7 +35,6 @@ def decrypt(sentence, key):
 
 
 def crack(encrypted_str, percent=0.8):
-    dictionary = MultiDictionary()
     words = encrypted_str.split(" ")
     optimize_list = []
     deciphered = ""
